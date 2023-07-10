@@ -6,25 +6,29 @@ display = pygame.display.set_mode((1280, 720))
 fps = pygame.time.Clock()
 jogando = True
 
-rect_1 = pygame.Rect(0, 0, 200, 200)
-rect_2 = pygame.Rect(1080, 0, 200, 200)
-rect_3 = pygame.Rect(1080, 520, 200, 200)
-rect_4 = pygame.Rect(0, 520, 200, 200)
-
-
-
+rect_1 = pygame.Rect(300, 300, 100, 100)
 
 while jogando:
 
     display.fill((0, 0, 0))
-    pygame.draw.rect(display, (0, 255, 255), rect_1)
-    pygame.draw.rect(display, (255, 0, 0), rect_2)
-    pygame.draw.rect(display, (183, 0, 255), rect_3)
-    pygame.draw.rect(display, (0, 255, 179), rect_4)
+    pygame.draw.rect(display, (255, 255, 255), rect_1)
 
-    pygame.draw.circle(display, (0, 80, 84), (300, 300), 50)
-    pygame.draw.circle(display, (89, 185, 212), (400, 500), 100)
-    pygame.draw.circle(display, (55, 44, 145), (800, 550), 150)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            jogando = False
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                if rect_1.y > 0:
+                    rect_1.y -= 5
+
+            if event.key == pygame.K_s:
+                if rect_1.y < 620:
+                    rect_1.y += 5
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            print(event.pos)
+
 
     fps.tick(60)
     pygame.display.flip()
